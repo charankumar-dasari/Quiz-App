@@ -1,0 +1,12 @@
+body { background: #f8fafc; font-family: 'Segoe UI', sans-serif; }
+.quiz-card { max-width: 800px; margin: 2rem auto; }
+.option { cursor: pointer; margin: 6px 0; padding: 8px 14px; border-radius: 8px; border: 1px solid #dee2e6; transition: all 0.2s; font-size: 0.95rem; }
+.option:hover { background: #f1f5f9; }
+.option.correct { background: #d1e7dd; border-color: #0f5132; }
+.option.wrong { background: #f8d7da; border-color: #842029; }
+.option.disabled { pointer-events: none; opacity: 0.7; }
+#progress { height: 8px; }
+.category-card { transition: transform .2s; }
+.category-card:hover { transform: translateY(-5px); box-shadow: 0 6px 20px rgba(0,0,0,.1); }
+.review-answer.correct { color: green; }
+.review-answer.wrong { color: red; }
