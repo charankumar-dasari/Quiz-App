@@ -1,3 +1,4 @@
+
 // Questions
 const questions = [
   {id:'CJ01',category:'Core Java',question:'What is JVM?',choices:['Java Virtual Machine','Java Verified Machine','Java Visual Machine','None'],answer:0},
@@ -19,112 +20,195 @@ const questions = [
 ];
 
 // State
-let state = { pool: [], index: 0, score: 0, selected: [], category: 'All' };
+let state = {
+  pool: [],
+  index: 0,
+  score: 0,
+  selected: [],
+  category: 'All'
+};
 
 // Elements
-const startScreen=document.getElementById('startScreen');
-const quizScreen=document.getElementById('quizScreen');
-const resultScreen=document.getElementById('resultScreen');
-const reviewScreen=document.getElementById('reviewScreen');
-const leaderboardScreen=document.getElementById('leaderboardScreen');
+const startScreen = document.getElementById('startScreen');
+const quizScreen = document.getElementById('quizScreen');
+const resultScreen = document.getElementById('resultScreen');
+const reviewScreen = document.getElementById('reviewScreen');
+const leaderboardScreen = document.getElementById('leaderboardScreen');
 
-const questionText=document.getElementById('questionText');
-const choicesEl=document.getElementById('choices');
-const progress=document.getElementById('progress');
-const categoryLabel=document.getElementById('categoryLabel');
-const scoreText=document.getElementById('scoreText');
-const reviewList=document.getElementById('reviewList');
-const leaderboardList=document.getElementById('leaderboardList');
+const questionText = document.getElementById('questionText');
+const choicesEl = document.getElementById('choices');
+const progress = document.getElementById('progress');
+const categoryLabel = document.getElementById('categoryLabel');
+const scoreText = document.getElementById('scoreText');
+const reviewList = document.getElementById('reviewList');
+const leaderboardList = document.getElementById('leaderboardList');
 
 // Buttons
-document.querySelectorAll('.category-card').forEach(c=>c.addEventListener('click',()=>startQuiz(c.dataset.category)));
-document.getElementById('nextBtn').addEventListener('click',()=>{ state.index++; showQuestion(); });
-document.getElementById('restartBtn').addEventListener('click',()=>location.reload());
-document.getElementById('reviewBtn').addEventListener('click',()=>showReview());
-document.getElementById('leaderboardBtn').addEventListener('click',()=>showLeaderboard());
-document.getElementById('backHomeBtn').addEventListener('click',()=>location.reload());
-document.getElementById('backHomeBtn2').addEventListener('click',()=>location.reload());
+document.querySelectorAll('.category-card').forEach(c =>
+  c.addEventListener('click', () => startQuiz(c.dataset.category))
+);
+
+document.getElementById('nextBtn').addEventListener('click', () => {
+  state.index++;
+  showQuestion();
+});
+
+document.getElementById('restartBtn').addEventListener('click', () => location.reload());
+document.getElementById('reviewBtn').addEventListener('click', () => showReview());
+document.getElementById('leaderboardBtn').addEventListener('click', () => showLeaderboard());
+document.getElementById('backHomeBtn').addEventListener('click', () => location.reload());
+document.getElementById('backHomeBtn2').addEventListener('click', () => location.reload());
 
 // Quiz Flow
-function startQuiz(category){
-  state.category=category;
-  state.pool=category==='All'?questions:[...questions.filter(q=>q.category===category)];
-  state.index=0; state.score=0; state.selected=new Array(state.pool.length).fill(null);
+function startQuiz(category) {
+  state.category = category;
+
+  state.pool = category === 'All'
+    ? questions
+    : [...questions.filter(q => q.category === category)];
+
+  state.index = 0;
+  state.score = 0;
+  state.selected = new Array(state.pool.length).fill(null);
+
   startScreen.classList.add('d-none');
   quizScreen.classList.remove('d-none');
+
   showQuestion();
 }
 
-function showQuestion(){
-  if(state.index>=state.pool.length){return finishQuiz();}
-  const q=state.pool[state.index];
-  questionText.textContent=`Q${state.index+1}. ${q.question}`;
-  categoryLabel.textContent=`${q.category}`;
-  progress.style.width=((state.index/state.pool.length)*100)+'%';
-  choicesEl.innerHTML='';
-  q.choices.forEach((ch,i)=>{
-    const btn=document.createElement('div');
-    btn.className='option';
-    btn.textContent=ch;
-    btn.dataset.idx=i;
-    btn.onclick=()=>selectOption(i);
+function showQuestion() {
+  if (state.index >= state.pool.length) {
+    return finishQuiz();
+  }
+
+  const q = state.pool[state.index];
+
+  questionText.textContent = `Q${state.index + 1}. ${q.question}`;
+  categoryLabel.textContent = `${q.category}`;
+
+  progress.style.width =
+    ((state.index / state.pool.length) * 100) + '%';
+
+  choicesEl.innerHTML = '';
+
+  q.choices.forEach((ch, i) => {
+    const btn = document.createElement('div');
+
+    btn.className = 'option';
+    btn.textContent = ch;
+    btn.dataset.idx = i;
+
+    btn.onclick = () => selectOption(i);
+
     choicesEl.appendChild(btn);
   });
 }
 
-function selectOption(i){
-  const q=state.pool[state.index];
-  state.selected[state.index]=i;
-  if(i===q.answer){state.score++;}
-  [...choicesEl.children].forEach((c,idx)=>{
+function selectOption(i) {
+  const q = state.pool[state.index];
+
+  state.selected[state.index] = i;
+
+  if (i === q.answer) {
+    state.score++;
+  }
+
+  [...choicesEl.children].forEach((c, idx) => {
     c.classList.add('disabled');
-    if(idx===q.answer) c.classList.add('correct');
-    else if(idx===i) c.classList.add('wrong');
+
+    if (idx === q.answer) {
+      c.classList.add('correct');
+    } else if (idx === i) {
+      c.classList.add('wrong');
+    }
   });
 }
 
-function finishQuiz(){
+function finishQuiz() {
   quizScreen.classList.add('d-none');
   resultScreen.classList.remove('d-none');
-  progress.style.width='100%';
-  scoreText.textContent=`You scored ${state.score} / ${state.pool.length}`;
+
+  progress.style.width = '100%';
+
+  scoreText.textContent =
+    `You scored ${state.score} / ${state.pool.length}`;
+
   saveScore();
 }
 
-function showReview(){
+function showReview() {
   resultScreen.classList.add('d-none');
   reviewScreen.classList.remove('d-none');
-  reviewList.innerHTML='';
-  state.pool.forEach((q,idx)=>{
-    const userAns=state.selected[idx];
-    const div=document.createElement('div');
-    div.className='mb-3';
-    div.innerHTML=`<strong>Q${idx+1}. ${q.question}</strong><br>
-      <span class="review-answer ${userAns===q.answer?'correct':'wrong'}">Your Answer: ${userAns!==null?q.choices[userAns]:'Not answered'}</span><br>
-      <span class="text-success">Correct Answer: ${q.choices[q.answer]}</span>`;
+
+  reviewList.innerHTML = '';
+
+  state.pool.forEach((q, idx) => {
+    const userAns = state.selected[idx];
+
+    const div = document.createElement('div');
+
+    div.className = 'mb-3';
+
+    div.innerHTML = `
+      <strong>Q${idx + 1}. ${q.question}</strong><br>
+
+      <span class="review-answer ${userAns === q.answer ? 'correct' : 'wrong'}">
+        Your Answer: ${userAns !== null ? q.choices[userAns] : 'Not answered'}
+      </span><br>
+
+      <span class="text-success">
+        Correct Answer: ${q.choices[q.answer]}
+      </span>
+    `;
+
     reviewList.appendChild(div);
   });
 }
 
 // Leaderboard
-function saveScore(){
-  const name=prompt("Enter your name:");
-  if(!name) return;
-  const hs=JSON.parse(localStorage.getItem('quiz_highscores')||'[]');
-  hs.push({name, score: state.score, total: state.pool.length, date:new Date().toLocaleString()});
-  localStorage.setItem('quiz_highscores',JSON.stringify(hs));
+function saveScore() {
+  const name = prompt("Enter your name:");
+
+  if (!name) return;
+
+  const hs = JSON.parse(
+    localStorage.getItem('quiz_highscores') || '[]'
+  );
+
+  hs.push({
+    name,
+    score: state.score,
+    total: state.pool.length,
+    date: new Date().toLocaleString()
+  });
+
+  localStorage.setItem(
+    'quiz_highscores',
+    JSON.stringify(hs)
+  );
 }
 
-function showLeaderboard(){
+function showLeaderboard() {
   resultScreen.classList.add('d-none');
   leaderboardScreen.classList.remove('d-none');
-  leaderboardList.innerHTML='';
-  const hs=JSON.parse(localStorage.getItem('quiz_highscores')||'[]');
-  hs.sort((a,b)=>b.score-a.score);
-  hs.forEach(h=>{
-    const li=document.createElement('li');
-    li.className='list-group-item';
-    li.textContent=`${h.name} — ${h.score}/${h.total} (${h.date})`;
+
+  leaderboardList.innerHTML = '';
+
+  const hs = JSON.parse(
+    localStorage.getItem('quiz_highscores') || '[]'
+  );
+
+  hs.sort((a, b) => b.score - a.score);
+
+  hs.forEach(h => {
+    const li = document.createElement('li');
+
+    li.className = 'list-group-item';
+
+    li.textContent =
+      `${h.name} — ${h.score}/${h.total} (${h.date})`;
+
     leaderboardList.appendChild(li);
   });
 }
