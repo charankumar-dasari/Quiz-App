@@ -1,3 +1,4 @@
+
 <!DOCTYPE html>
 <html lang="en">
 <head>
@@ -8,104 +9,219 @@
   <link rel="stylesheet" href="style.css">
 </head>
 <body>
-  <div class="container py-4">
-    <!-- Start Screen -->
-    <div id="startScreen" class="quiz-card text-center">
-      <h2 class="mb-4 fw-bold text-primary">QuizLab — Tech Quiz</h2>
-      <p class="text-muted">Select a category and start your quiz</p>
-      <div class="row g-3 mt-4">
-        <div class="col-md-4">
-          <div class="card category-card p-3" data-category="All">
-            <h5 class="fw-bold">All Topics</h5>
-            <p class="text-muted small">Mix of all categories</p>
-          </div>
+  <main class="app-shell">
+    <header class="topbar">
+      <a class="brand" href="#">
+        <span class="brand-mark">Q</span>
+        <span>Quiz<span class="brand-accent">Lab</span></span>
+      </a>
+      <span class="topbar-note">
+        <span class="status-dot"></span>
+        Learn. Practice. Level up.
+      </span>
+    </header>
+
+    <div class="container app-container">
+
+      <!-- Start Screen -->
+      <div id="startScreen" class="quiz-card start-card text-center">
+        <div class="eyebrow">
+          <span class="eyebrow-line"></span>
+          YOUR KNOWLEDGE, YOUR PACE
         </div>
-        <div class="col-md-4">
-          <div class="card category-card p-3" data-category="Core Java">
-            <h5 class="fw-bold">Core Java</h5>
-            <p class="text-muted small">OOP, basics, JVM</p>
+
+        <h1 class="hero-title">
+          Ready to test your<br>
+          <span>tech skills?</span>
+        </h1>
+
+        <p class="hero-subtitle">
+          Choose a topic and see what you know.
+          Every question is a step forward.
+        </p>
+
+        <div class="section-heading">
+          <div>
+            <h2>Choose your category</h2>
+            <p>Pick a subject to get started</p>
           </div>
+          <span class="topic-count">8 TOPICS</span>
         </div>
-        <div class="col-md-4">
-          <div class="card category-card p-3" data-category="Advanced Java">
-            <h5 class="fw-bold">Advanced Java</h5>
-            <p class="text-muted small">JDBC, Servlets</p>
+
+        <div class="row g-3 category-grid">
+
+          <div class="col-md-4 col-sm-6">
+            <div class="card category-card" data-category="All">
+              <span class="category-icon icon-all">✦</span>
+              <h5>All Topics</h5>
+              <p>Mix of all categories</p>
+              <span class="category-arrow">↗</span>
+            </div>
           </div>
-        </div>
-        <div class="col-md-4">
-          <div class="card category-card p-3" data-category="HTML">
-            <h5 class="fw-bold">HTML</h5>
-            <p class="text-muted small">Web basics</p>
+
+          <div class="col-md-4 col-sm-6">
+            <div class="card category-card" data-category="Core Java">
+              <span class="category-icon icon-java">☕</span>
+              <h5>Core Java</h5>
+              <p>OOP, basics, JVM</p>
+              <span class="category-arrow">↗</span>
+            </div>
           </div>
-        </div>
-        <div class="col-md-4">
-          <div class="card category-card p-3" data-category="CSS">
-            <h5 class="fw-bold">CSS</h5>
-            <p class="text-muted small">Styling web pages</p>
+
+          <div class="col-md-4 col-sm-6">
+            <div class="card category-card" data-category="Advanced Java">
+              <span class="category-icon icon-advanced">⌘</span>
+              <h5>Advanced Java</h5>
+              <p>JDBC, Servlets</p>
+              <span class="category-arrow">↗</span>
+            </div>
           </div>
-        </div>
-        <div class="col-md-4">
-          <div class="card category-card p-3" data-category="JavaScript">
-            <h5 class="fw-bold">JavaScript</h5>
-            <p class="text-muted small">DOM, ES6</p>
+
+          <div class="col-md-4 col-sm-6">
+            <div class="card category-card" data-category="HTML">
+              <span class="category-icon icon-html">&lt;/&gt;</span>
+              <h5>HTML</h5>
+              <p>Web basics</p>
+              <span class="category-arrow">↗</span>
+            </div>
           </div>
-        </div>
-        <div class="col-md-4">
-          <div class="card category-card p-3" data-category="Angular">
-            <h5 class="fw-bold">Angular</h5>
-            <p class="text-muted small">Framework basics</p>
+
+          <div class="col-md-4 col-sm-6">
+            <div class="card category-card" data-category="CSS">
+              <span class="category-icon icon-css">✳</span>
+              <h5>CSS</h5>
+              <p>Styling web pages</p>
+              <span class="category-arrow">↗</span>
+            </div>
           </div>
-        </div>
-        <div class="col-md-4">
-          <div class="card category-card p-3" data-category="MySQL">
-            <h5 class="fw-bold">MySQL</h5>
-            <p class="text-muted small">Database queries</p>
+
+          <div class="col-md-4 col-sm-6">
+            <div class="card category-card" data-category="JavaScript">
+              <span class="category-icon icon-js">JS</span>
+              <h5>JavaScript</h5>
+              <p>DOM, ES6</p>
+              <span class="category-arrow">↗</span>
+            </div>
           </div>
+
+          <div class="col-md-4 col-sm-6">
+            <div class="card category-card" data-category="Angular">
+              <span class="category-icon icon-angular">A</span>
+              <h5>Angular</h5>
+              <p>Framework basics</p>
+              <span class="category-arrow">↗</span>
+            </div>
+          </div>
+
+          <div class="col-md-4 col-sm-6">
+            <div class="card category-card" data-category="MySQL">
+              <span class="category-icon icon-mysql">▤</span>
+              <h5>MySQL</h5>
+              <p>Database queries</p>
+              <span class="category-arrow">↗</span>
+            </div>
+          </div>
+
         </div>
       </div>
-    </div>
 
-    <!-- Quiz Screen -->
-    <div id="quizScreen" class="quiz-card card shadow d-none">
-      <div class="card-body">
-        <div class="d-flex justify-content-between mb-2">
-          <small id="categoryLabel" class="text-muted"></small>
-          <small id="timer" class="fw-bold text-danger"></small>
-        </div>
-        <div class="progress mb-3">
-          <div id="progress" class="progress-bar bg-primary" style="width:0%"></div>
-        </div>
-        <h5 id="questionText" class="mb-3"></h5>
-        <div id="choices" class="mb-3"></div>
-        <div class="d-flex justify-content-between">
-          <button id="nextBtn" class="btn btn-primary btn-sm">Next</button>
+      <!-- Quiz Screen -->
+      <div id="quizScreen" class="quiz-card quiz-panel card shadow d-none">
+        <div class="card-body">
+
+          <div class="quiz-topline">
+            <small id="categoryLabel" class="category-label"></small>
+            <small id="timer" class="timer-label"></small>
+          </div>
+
+          <div class="progress quiz-progress">
+            <div id="progress" class="progress-bar" style="width:0%"></div>
+          </div>
+
+          <div class="question-meta">QUESTION</div>
+
+          <h2 id="questionText" class="question-title mb-4"></h2>
+
+          <div id="choices" class="choices-list mb-4"></div>
+
+          <div class="quiz-actions">
+            <span class="keyboard-hint">Choose the best answer</span>
+            <button id="nextBtn" class="btn btn-primary next-button">
+              Next question <span>→</span>
+            </button>
+          </div>
+
         </div>
       </div>
+
+      <!-- Result Screen -->
+      <div id="resultScreen" class="quiz-card result-panel card shadow d-none text-center">
+        <div class="card-body">
+
+          <div class="result-symbol">✦</div>
+
+          <div class="eyebrow justify-content-center">
+            QUIZ COMPLETED
+          </div>
+
+          <h2 class="result-title">Quiz Finished!</h2>
+
+          <p class="result-subtitle">
+            Great effort. Here's how you did.
+          </p>
+
+          <p id="scoreText" class="score-text"></p>
+
+          <div class="result-actions">
+            <button class="btn btn-secondary" id="restartBtn">Restart</button>
+            <button class="btn btn-info" id="reviewBtn">Review Answers</button>
+            <button class="btn btn-warning" id="leaderboardBtn">Leaderboard</button>
+          </div>
+
+        </div>
+      </div>
+
+      <!-- Review Screen -->
+      <div id="reviewScreen" class="quiz-card content-panel card shadow d-none">
+        <div class="card-body">
+
+          <div class="eyebrow">YOUR PERFORMANCE</div>
+
+          <h2 class="panel-title mb-4">Review Answers</h2>
+
+          <div id="reviewList"></div>
+
+          <button class="btn btn-primary back-button mt-3" id="backHomeBtn">
+            ← Back to Home
+          </button>
+
+        </div>
+      </div>
+
+      <!-- Leaderboard Screen -->
+      <div id="leaderboardScreen" class="quiz-card content-panel card shadow d-none">
+        <div class="card-body">
+
+          <div class="eyebrow">TOP PERFORMANCES</div>
+
+          <h2 class="panel-title mb-4">Leaderboard</h2>
+
+          <ul id="leaderboardList" class="list-group leaderboard-list"></ul>
+
+          <button class="btn btn-primary back-button mt-3" id="backHomeBtn2">
+            ← Back to Home
+          </button>
+
+        </div>
+      </div>
+
     </div>
 
-    <!-- Result Screen -->
-    <div id="resultScreen" class="quiz-card card shadow d-none text-center p-4">
-      <h3 class="text-success">Quiz Finished!</h3>
-      <p id="scoreText"></p>
-      <button class="btn btn-secondary me-2" id="restartBtn">Restart</button>
-      <button class="btn btn-info me-2" id="reviewBtn">Review Answers</button>
-      <button class="btn btn-warning" id="leaderboardBtn">Leaderboard</button>
-    </div>
+    <footer class="app-footer">
+      Made for curious minds <span>✦</span>
+    </footer>
 
-    <!-- Review Screen -->
-    <div id="reviewScreen" class="quiz-card card shadow d-none p-4">
-      <h4 class="mb-3">Review Answers</h4>
-      <div id="reviewList"></div>
-      <button class="btn btn-primary mt-3" id="backHomeBtn">Back to Home</button>
-    </div>
-
-    <!-- Leaderboard Screen -->
-    <div id="leaderboardScreen" class="quiz-card card shadow d-none p-4">
-      <h4 class="mb-3">Leaderboard</h4>
-      <ul id="leaderboardList" class="list-group"></ul>
-      <button class="btn btn-primary mt-3" id="backHomeBtn2">Back to Home</button>
-    </div>
-  </div>
+  </main>
 
   <script src="script.js"></script>
 </body>
